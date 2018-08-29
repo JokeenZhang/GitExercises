@@ -33,7 +33,7 @@ git diff
 3. git push origin company
 4. 快快推送！！！
 5. 再修改
-6. 修改后需要commit，再去push
+6. 修改后需要commit，再去push，甚至是修改后需要重新add，然后再去commit
 
 ## 配置
 
