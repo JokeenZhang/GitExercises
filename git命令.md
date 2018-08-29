@@ -23,3 +23,18 @@ git diff
 查看分支：git checkout 分支名
 
 创建并切换分支：git checkout -b 分支名
+
+
+
+## 操作
+
+1. 创建新分支并切换到新分支company
+2. 创建新的commit
+3. git push origin company
+4. 快快推送！！！
+
+配置
+
+1. 通过将Git配置变量 core.quotepath 设置为false，就可以解决中文文件名称在这些Git命令输出中的显示问题
+
+   >  $ git config --global core.quotepath false
