@@ -33,7 +33,7 @@ git diff
 3. git push origin company
 4. 快快推送！！！
 5. 再修改
-6. 修改后需要commit，再去push，甚至是修改后需要重新add，然后再去commit
+6. 修改后需要commit，再去push，甚至是修改后需要重新add，然后再去commit，通过git status，如果修改后的文件是红色的，那么就需要去add，add后，再敲命令git status ，如果modified变成绿色，就可以了，准备提交吧
 
 ## 配置
 
