@@ -12,7 +12,7 @@ git diff
 
 ## 分支
 
-列出仓库中的所有分支：git branch
+列出仓库中的所有分支：git branch，这个命令只能查看本地仓库的分支，git branch -a能查看所有分支，包括远程仓库的分支，如origin/HEAD，origin/master
 
 创建分支，不切换：git branch -d 分支名
 
