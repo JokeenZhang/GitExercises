@@ -32,8 +32,9 @@ git diff
 2. 创建新的commit
 3. git push origin company
 4. 快快推送！！！
+5. 再修改
 
-配置
+## 配置
 
 1. 通过将Git配置变量 core.quotepath 设置为false，就可以解决中文文件名称在这些Git命令输出中的显示问题
 
