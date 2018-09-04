@@ -57,3 +57,18 @@ git diff
 1. 通过将Git配置变量 core.quotepath 设置为false，就可以解决中文文件名称在这些Git命令输出中的显示问题
 
    >  $ git config --global core.quotepath false
+
+
+
+## 2018-09-04
+
+### 操作
+
+
+
+1. 创建分支develop
+2. 修改并在分支提交
+3. 推送修改到远程分支
+4. 切换到本地master分支
+5. 合并develop到master
+6. 推送修改到远程master
