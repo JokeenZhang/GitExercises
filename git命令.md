@@ -64,11 +64,24 @@ git diff
 
 ### 操作
 
-
-
 1. 创建分支develop
+
+   git checkout -b develop
+
 2. 修改并在分支提交
+
+   git push origin develop
+
+   git status
+
+   git commit -m "温习git流程"
+
 3. 推送修改到远程分支
+
+   git push origin develop
+
 4. 切换到本地master分支
+
 5. 合并develop到master
+
 6. 推送修改到远程master
