@@ -92,6 +92,18 @@ git diff
 
 发现：并不能产生多条线，给人的感觉好像是还是在同一个分支里工作一样，这与之前的工作流表现完全不同
 
-![](D:\self_use\GitExercises\images\工作流不同.png)
+![](.\images\工作流不同.png)
 
 ### 疑问
+
+1. 合并不能产生多条线
+
+   原因： master 前面没有任何的新 commit，这种合并会自动使用 fast forward，加上--no-ff，git merge develop --no-ff
+
+   ![](.\images\关闭fast fordward.png)
+
+   > git merge –no-ff 可以保存你之前的分支历史。能够更好的查看 merge历史，以及branch 状态。
+   >
+   > git merge 则不会显示 feature，只保留单条分支记录。
+
+2. 
