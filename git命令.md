@@ -80,8 +80,10 @@ git diff
 
    git push origin develop
 
-4. 切换到本地master分支
+4. 以上步骤多执行几次，再合并到master分支
 
-5. 合并develop到master
+5. 切换到本地master分支
 
-6. 推送修改到远程master
+6. 合并develop到master
+
+7. 推送修改到远程master
