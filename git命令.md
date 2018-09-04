@@ -82,13 +82,11 @@ git diff
 
 4. 以上步骤多执行几次，再合并到master分支
 
-5. 执行三次后，开始合并并推送到远程master分支
+5. 切换到本地master分支
 
-6. 切换到本地master分支
+6. 合并develop到master
 
-7. 合并develop到master
-
-8. 推送修改到远程master
+7. 推送修改到远程master
 
 总结：总的来说，在分支修改完成后，提交到远程分支，再在本地切换分支到master分支，合并分支，推送到远程master分支
 
