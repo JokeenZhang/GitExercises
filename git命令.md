@@ -106,4 +106,10 @@ git diff
    >
    > git merge 则不会显示 feature，只保留单条分支记录。
 
-2. 
+2. 当远程master分支比远程develop分支更超前，如何同步两个分支？
+
+   git checkout develop
+
+   git pull origin master
+
+   git push origin develop
