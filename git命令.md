@@ -113,3 +113,100 @@ git diff
    git pull origin master
 
    git push origin develop
+
+## 2018-09-20
+
+### Stash
+
+> 背景：
+>
+> 1. 经常有这样的事情发生，当你正在进行项目中某一部分的工作，里面的东西处于一个比较杂乱的状态，而你想转到其他分支上进行一些工作。问题是，你不想提交进行了一半的工作，否则以后你无法回到这个工作点。解决这个问题的办法就是`git stash`命令
+>
+> 2. 当前分支有修改，不能直接切换到其他分支，需要`commit`或者`stash`，如果是先`commit`再去切换分支，无疑在`log`中增加了很多无意义的commit，这时候`stash`就派上用场了
+
+#### 命令注解
+
+1. `git stash `
+
+   保存当前工作进度，会把暂存区和工作区的改动保存起来，执行完这个命令后，在运行`git status`命令，就会发现当前是一个干净的工作区，没有任何改动
+
+2. `git stash list`
+
+   显示保存进度的列表
+
+3. `git stash pop stash [stash_id]`
+
+   - `git stash pop` 恢复最新的进度到工作区。git默认会把工作区和暂存区的改动都恢复到工作区。
+   - `git stash pop --index` 恢复最新的进度到工作区和暂存区。（尝试将原来暂存区的改动还恢复到暂存区）
+   - `git stash pop stash@{1}`恢复指定的进度到工作区。stash_id是通过`git stash list`命令得到的 
+     通过`git stash pop`命令恢复进度后，会删除当前进度。
+
+4. `git stash apply stash [stash_id]`
+
+   除了不删除恢复的进度之外，其余和`git stash pop` 命令一样。
+
+5. `git stash drop [stash_id]`
+
+   删除一个存储的进度。如果不指定stash_id，则默认删除最新的存储进度。
+
+6. `git stash clear`
+
+   删除所有存储的进度。
+
+#### 场景
+
+##### 冲突
+
+在使用过程中，有遇到如下场景：
+
+在当前项目中已经有过修改，此时同事推送commit到远程仓库，我需要将那些commit拉取到本地，那么此时我就先将自己的修改通过`git stash`存储到stash里，通过`git pull`获取到同事修改的代码，然后再恢复自己的更新：`git stash pop`（因为删掉了之前的stash，直接拿最新的stash），发现有冲突，日志如下，但是去发现，这指明冲突的几个文件并无修改，但就是在工作区中，且之前保存的几处修改都消失了
+
+```
+Administrator@MINEW-66 MINGW64 /f/self (master|REBASE-i 1/1)
+$ git stash apply stash@{0}
+error: Your local changes to the following files would be overwritten by merge:
+        app/src/main/A.java
+        app/src/main/B.java
+        app/src/main/C.java
+Please commit your changes or stash them before you merge.
+Aborting
+```
+
+这时，`git stash show -p | git apply && git stash drop`解决问题
+
+```
+Administrator@MINEW-66 MINGW64 /f/self (master|REBASE-i 1/1)
+$ git stash show -p | git apply && git stash drop
+Dropped refs/stash@{0} (c4f1cce0e9e43c468d4109f233d4770b0a37d672)
+```
+
+### 当前git配置
+
+1. 获取**当前目录**下git配置信息
+
+   在同一台电脑中既有公司的git账号，也有github账号，虽然已经将公司git账号设置为全局，特定文件夹用github上的账号，但还是需要检验一下，以免出现意外
+
+   `git config user.name` 获取用户名称
+
+   `git config user.email` 获取用户邮箱
+
+2. 在指定目录下配置信息
+
+   直接设定当前目录下的用户名为John，邮箱为johndoe@example.com
+
+   `git config user.name "John"`
+
+   `git config user.email johndoe@example.com`
+
+3. 设置全局配置信息
+
+   通过`--global`设置用户和邮箱，在任意文件夹下如果关联git，每次提交时都会引用这两条信息，说明是谁提交了更新，所以会随更新内容一起被永久纳入历史记录
+
+   `git config --global user.name "John"`
+
+   `git config --global user.email johndoe@example.com`
+
+4. 检查已有的配置信息
+
+   `git config --list` 不止能获取到当前目录下的name和email，还包括远程仓库地址、分支等等
+
