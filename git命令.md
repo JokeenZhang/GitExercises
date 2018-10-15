@@ -155,7 +155,7 @@ git diff
 
 #### 场景
 
-##### 冲突
+##### 冲突1
 
 在使用过程中，有遇到如下场景：
 
@@ -179,6 +179,40 @@ Administrator@MINEW-66 MINGW64 /f/self (master|REBASE-i 1/1)
 $ git stash show -p | git apply && git stash drop
 Dropped refs/stash@{0} (c4f1cce0e9e43c468d4109f233d4770b0a37d672)
 ```
+
+##### 冲突2
+
+在两台电脑操作，先后clone responsity到这两台电脑，且分别做修改，A电脑`commit`修改并`push`到远程仓库里。B电脑要想`pull`此时的远程仓库的`commit`的话，需要：
+
+```
+#将B电脑的修改存到暂存区里，
+git stash
+#获取远程仓库的commit
+git pull
+#恢复进度
+git stash pop
+```
+
+如上三个步骤会产生冲突。解决步骤是：
+
+```
+#查看冲突文件路径
+git status
+#如果文件标红，那么就将文件添加进git管理
+git add .
+#这时候就开始真正解决冲突，通过代码对比工具，解决冲突后再次恢复进度
+#git stash pop
+```
+
+注：在这里我用的代码对比工具是Android Studio自带的git工具，在执行上述步骤的git add .之后，就开始正式按照Android Studio解决冲突的标准方式来解决冲突了，如下：
+
+1. Android Studio工具栏中，`VCS——》Git——》resolve conflicts`，点击，则打开了一个对话框，如下：
+
+   ![image](https://wx2.sinaimg.cn/large/e60a8256gy1fw8nzei6ekj20gq0fcjrg.jpg)
+
+   其实能找到在哪里打开这个对话框才是更重要的一步。解决冲突反而是比较简单的，强调是在`VCS——》Git——》resolve conflicts`中打开
+
+2. 解决完对话框所显示的冲突文件后，直接关闭就可以了
 
 ### 当前git配置
 
