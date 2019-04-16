@@ -24,6 +24,17 @@ git diff
 
 创建并切换分支：git checkout -b 分支名
 
+删除远程分支（20190416）
+
+```
+#要删除远程分支fix，本地没有fix分支
+git branch -a
+git branch -r -d origin/fix
+git push origin :fix (origin后有空格，fix已经被删掉了，tab键没有提示，要手动输入)
+```
+
+
+
 
 
 ## 操作
