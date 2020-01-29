@@ -2,7 +2,7 @@
 
 查看是否有ssh文件，有则获取ssh公钥
 
-
+## 添加ssh
 
 进入ssh文件夹，如果没有密钥则不会有此文件夹，有则备份删除`cd ~/.ssh`
 
@@ -32,7 +32,7 @@
 
 在此前已经记录了如何创建`ssh`并添加到`github`中，那么如何继续创建针对于码云的`ssh`而又不会和`github`的`ssh`相混淆甚至于相互影响呢？在这里用的是不同的名字并创建配置文件说明。做法如下：
 
-1. 创建`github`账号的`ssh key`
+1. 创建`github`账号的`ssh key`，设置rsa为id_rsa_work
 
    ```
    # 切换到C:\Users\Administrator\.ssh
@@ -89,7 +89,7 @@
           IdentityFile ~/.ssh/id_rsa_mayun
       ```
 
-      注意：`github`的`host`地址是`github.com`，`码云`的`host`的地址是：`gitee.com`。保存完后去测试是否成功
+      注意：`github`的`host`地址是`github.com`，`码云`的`host`的地址是：`gitee.com`。注意此前生成的rsa文件名是否与config文件编辑的是否保持一致。保存完后去测试是否成功
 
       ```
       ssh -T git@gitee.com
@@ -102,3 +102,5 @@
 
    - 可能没有**分别**添加`ssh key`到`github`及`git`服务，如`码云`
    - rsa文件名可能错误，如相同
+   
+8. 如果还有更多的git账号需要添加，则按以上步骤依次添加不同命名的rsa文件和在config配置即可

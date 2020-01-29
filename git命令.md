@@ -8,23 +8,60 @@ git status
 
 git diff
 
+## 将项目添加到版本控制
+
+### 创建 git 仓库:
+
+```
+mkdir PythonExercise
+cd PythonExercise
+git init
+touch README.md
+git add README.md
+git commit -m "first commit"
+git remote add origin git仓库地址
+git push -u origin master
+```
+
+### 已有仓库?
+
+```
+cd existing_git_repo
+git remote add origin git仓库地址
+git push -u origin master
+```
+
 
 
 ## 分支
 
 列出仓库中的所有分支：git branch，这个命令只能查看本地仓库的分支，git branch -a能查看所有分支，包括远程仓库的分支，如origin/HEAD，origin/master
 
-创建分支，不切换：git branch -d 分支名
+创建分支，不切换
 
-删除分支 ：git branch -d 分支名
+```
+git branch -d 分支名
+```
 
-删除指定分支：git branch -D 分支名
+删除分支 
 
-查看分支：git checkout 分支名
+```
+git branch -d 分支名
+```
+
+删除指定分支
+
+```
+git branch -D 分支名
+```
+
+切换分支
+
+```
+git checkout 分支名
+```
 
 创建并切换分支：git checkout -b 分支名
-
-
 
 ## 操作
 
@@ -58,7 +95,32 @@ git diff
 
    >  $ git config --global core.quotepath false
 
+## remote
 
+查看远程仓库地址
+
+```
+git remote -v
+```
+
+查看仓库名字
+
+```
+git remote
+//得到origin，这个是默认的，可更改
+```
+
+添加远程仓库，下方origin是远程仓库的地址，可更改为其他名字
+
+```
+git remote add origin 仓库地址
+```
+
+修改仓库地址
+
+```
+git remote set-url origin 仓库地址
+```
 
 ## 2018-09-04
 
@@ -66,19 +128,23 @@ git diff
 
 1. 创建分支develop
 
+   ```
    git checkout -b develop
+   ```
 
 2. 修改并在分支提交
 
-   git push origin develop
-
+   ```
+git push origin develop
    git status
-
-   git commit -m "温习git流程"
+git commit -m "温习git流程"
+   ```
 
 3. 推送修改到远程分支
 
+   ```
    git push origin develop
+   ```
 
 4. 以上步骤多执行几次，再合并到master分支
 
@@ -108,11 +174,11 @@ git diff
 
 2. 当远程master分支比远程develop分支更超前，如何同步两个分支？
 
-   git checkout develop
-
+   ```
+git checkout develop
    git pull origin master
-
-   git push origin develop
+git push origin develop
+   ```
 
 ## 2018-09-20
 
