@@ -82,7 +82,7 @@
 
     注意查看IdentityFile一行中，里面路径和文件名是否正确
 
-    也可通过cat ~/.ssh/id_rsa.pub查看公钥
+    也可通过cat ~/.ssh/id_rsa_mayun.pub查看公钥
 
 6. 注意：`github`的`host`地址是`github.com`，`码云`的`host`的地址是：`gitee.com`。注意此前生成的rsa文件名是否与config文件编辑的是否保持一致。保存完后去测试是否成功
 
