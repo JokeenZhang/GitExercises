@@ -1,5 +1,7 @@
 # ssh
 
+# ssh
+
 查看是否有ssh文件，有则获取ssh公钥
 
 ## 添加ssh
@@ -30,77 +32,69 @@
 
 使用git服务，就需要创建相对应的`ssh key`（大多数 Git 服务器都会选择使用`SSH公钥`来进行授权。系统中的每个用户都必须提供一个`公钥`用于`授权`，没有的话就要生成一个）。[git ssh](https://git-scm.com/book/zh/v1/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E7%9A%84-Git-%E7%94%9F%E6%88%90-SSH-%E5%85%AC%E9%92%A5)作用可自行查找资料
 
-在此前已经记录了如何创建`ssh`并添加到`github`中，那么如何继续创建针对于码云的`ssh`而又不会和`github`的`ssh`相混淆甚至于相互影响呢？在这里用的是不同的名字并创建配置文件说明。做法如下：
+在此前已经记录了如何创建`ssh`并添加到`github`中，那么如何继续创建针对于码云的`ssh`而又不会和`github`的`ssh`相混淆甚至于相互影响呢？可使用不同的名字并创建配置文件说明，并在config文件中配置使用的ssh文件
 
-1. 创建`github`账号的`ssh key`，设置rsa为id_rsa_work
+假设已经在.ssh文件夹下已经有github公钥了，那么做法如下：
+
+1. 创建`gitee`账号的`ssh key`，设置rsa为`id_rsa_mayun`，注意这里
 
    ```
    # 切换到C:\Users\Administrator\.ssh
    cd ~/.ssh     
    # 新建工作的SSH key
    ssh-keygen -t rsa -C "mywork@email.com"  
-   # 设置名称为id_rsa_work
-   Enter file in which to save the key (/c/Users/Administrator/.ssh/id_rsa): id_rsa_work
+   # 设置名称为id_rsa_mayun
+   Enter file in which to save the key (/c/Users/Administrator/.ssh/id_rsa): id_rsa_mayun
    ```
 
-2. 将这个密钥添加到`ssh agent`中，注意：在第一步已经将创建的`ssh key`名称设置为`id_rsa`
+2. 上个步骤会生成两个文件：其中一个带有 `.pub` 扩展名。 `.pub` 文件是你的公钥，另一个则是与之对应的私钥。右键pub文件，选择编辑，复制里面的内容至码云账号里的ssh页面，选择添加ssh公钥
+
+3. 将这个密钥添加到`ssh agent`中，注意：在第一步已经将创建的`ssh key`名称设置为`id_rsa_mayun`
 
    ```
-   ssh-add ~/.ssh/id_rsa_work
+   ssh-add ~/.ssh/id_rsa_mayun
    ```
 
    如果出现`Could not open a connection to your authentication agent`的错误，就试着用以下命令：
 
    ```
    ssh-agent bash
-   ssh-add ~/.ssh/id_rsa_work
-   ```
-
-3. 创建码云账号的`ssh key`，步骤同上，不过名字不能相同，可设置为`id_rsa_mayun`
-
-4. 将创建的码云的密钥也添加到`ssh agent`中，注意命令后面的名字
-
-   ```
    ssh-add ~/.ssh/id_rsa_mayun
    ```
 
-5. 将创建好的两个`ssh`文件分别添加到`github`和`码云`上，这很关键
+4. 创建或修改`config`文件
 
-6. 创建或修改`config`文件
+5. 如果.ssh文件夹没有`config`文件，可通过命令行创建
 
-   1. 如果.ssh文件夹没有`config`文件，可通过命令行创建
+    ```
+    touch config
+    ```
 
-      ```
-      touch config
-      ```
+    然后在文件夹中选择`config`**右键**点击文件，并选择编辑文件，添加如下内容：
 
-      然后在文件夹中选择`config`**右键**点击文件，并选择编辑文件，添加如下内容：
+    ```
+    # gitee
+    Host gitee.com
+        HostName gitee.com
+        User git
+        IdentityFile ~/.ssh/id_rsa_mayun
+    ```
 
-      ```
-      # github
-      Host github.com
-          HostName github.com
-          User git
-          IdentityFile ~/.ssh/id_rsa
-      # gitee
-      Host gitee.com
-          HostName gitee.com
-          User git
-          IdentityFile ~/.ssh/id_rsa_mayun
-      ```
+    注意查看IdentityFile一行中，里面路径和文件名是否正确
 
-      注意：`github`的`host`地址是`github.com`，`码云`的`host`的地址是：`gitee.com`。注意此前生成的rsa文件名是否与config文件编辑的是否保持一致。保存完后去测试是否成功
+    也可通过cat ~/.ssh/id_rsa.pub查看公钥
 
-      ```
-      ssh -T git@gitee.com
-      ssh -T git@github.com
-      ```
+6. 注意：`github`的`host`地址是`github.com`，`码云`的`host`的地址是：`gitee.com`。注意此前生成的rsa文件名是否与config文件编辑的是否保持一致。保存完后去测试是否成功
 
-      如果成功后会有提示`“Hi xxx, You've successfully authenticated”`的提示
+    ```
+    ssh -T git@gitee.com
+    ```
 
-7. 失败可能
+    如果成功后会有提示`“Hi xxx, You've successfully authenticated”`的提示
 
-   - 可能没有**分别**添加`ssh key`到`github`及`git`服务，如`码云`
-   - rsa文件名可能错误，如相同
-   
-8. 如果还有更多的git账号需要添加，则按以上步骤依次添加不同命名的rsa文件和在config配置即可
+    1. 失败可能
+
+    - 可能没有**分别**添加`ssh key`到`github`及`git`服务，如`码云`，即第二步没做
+    - rsa文件名可能错误，如相同+
+
+7. 如果还有更多的git账号需要添加，则按以上步骤依次添加不同命名的rsa文件和在config配置即可
