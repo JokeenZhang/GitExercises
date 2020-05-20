@@ -95,7 +95,7 @@ git push origin :fix (origin后有空格，fix已经被删掉了，tab键没有�
    git push 推送到远程仓库
    git branch -d company 删除本地的master分支
    git push origin -d books 删除仓库的company分支
-   ```
+```
 
 
 ## 配置
@@ -129,6 +129,15 @@ git remote add origin 仓库地址
 
 ```
 git remote set-url origin 仓库地址
+```
+
+## Repository
+
+git init后，在添加远程仓库地址时，输入origin错误——oritin，这是本地仓库中相对远程仓库的名称，可通过如下命令改回origin
+
+```
+git remote rm oritin
+git remote add origin https://gitee.com/know_the_season/AppModule.git
 ```
 
 ## 2018-09-04
@@ -318,4 +327,6 @@ git add .
 4. 检查已有的配置信息
 
    `git config --list` 不止能获取到当前目录下的name和email，还包括远程仓库地址、分支等等
+
+
 
