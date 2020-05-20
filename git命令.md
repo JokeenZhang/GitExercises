@@ -292,7 +292,7 @@ git add .
 
 1. Android Studio工具栏中，`VCS——》Git——》resolve conflicts`，点击，则打开了一个对话框，如下：
 
-   ![image](https://wx2.sinaimg.cn/large/e60a8256gy1fw8nzei6ekj20gq0fcjrg.jpg)
+   ![image](.\images\e60a8256gy1fw8nzei6ekj20gq0fcjrg.jpg)
 
    其实能找到在哪里打开这个对话框才是更重要的一步。解决冲突反而是比较简单的，强调是在`VCS——》Git——》resolve conflicts`中打开
 
