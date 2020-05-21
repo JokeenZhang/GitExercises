@@ -31,8 +31,6 @@ git remote add origin git仓库地址
 git push -u origin master
 ```
 
-
-
 ## 分支
 
 列出仓库中的所有分支：git branch，这个命令只能查看本地仓库的分支，git branch -a能查看所有分支，包括远程仓库的分支，如origin/HEAD，origin/master
@@ -72,9 +70,6 @@ git push origin :fix (origin后有空格，fix已经被删掉了，tab键没有�
 git checkout -b 分支名
 ```
 
-```
-
-
 ## 操作
 
 1. 创建新分支并切换到新分支company
@@ -91,15 +86,14 @@ git checkout -b 分支名
 
 7. 切换分支到master，合并，并删除company分支
 
-   ```nginx
+   ```
    git checkout master 切换分支到master
    git pull 拉取远程的更新
    git merge company 合并master到master
    git push 推送到远程仓库
    git branch -d company 删除本地的master分支
    git push origin -d books 删除仓库的company分支
-```
-
+   ```
 
 ## 配置
 
@@ -156,9 +150,9 @@ git remote add origin https://gitee.com/know_the_season/AppModule.git
 2. 修改并在分支提交
 
    ```
-	git push origin develop
+   git push origin develop
     git status
-	git commit -m "温习git流程"
+   git commit -m "温习git流程"
    ```
 
 3. 推送修改到远程分支
@@ -185,7 +179,12 @@ git remote add origin https://gitee.com/know_the_season/AppModule.git
 
 1. 合并不能产生多条线
 
-   原因： master 前面没有任何的新 commit，这种合并会自动使用 fast forward，加上--no-ff，git merge develop --no-ff
+   原因： master 前面没有任何的新 commit，这种合并会自动使用 fast forward，加上--no-ff，即
+
+      ```
+      #合并develop分支到master分支
+      git merge develop --no-ff
+      ```
 
    ![](https://zzq-markdown.oss-cn-shenzhen.aliyuncs.com/image/关闭fast fordward.png)
 
@@ -196,9 +195,9 @@ git remote add origin https://gitee.com/know_the_season/AppModule.git
 2. 当远程master分支比远程develop分支更超前，如何同步两个分支？
 
    ```
-git checkout develop
+   git checkout develop
    git pull origin master
-git push origin develop
+   git push origin develop
    ```
 
 ## 2018-09-20
@@ -330,6 +329,3 @@ git add .
 4. 检查已有的配置信息
 
    `git config --list` 不止能获取到当前目录下的name和email，还包括远程仓库地址、分支等等
-
-
-
