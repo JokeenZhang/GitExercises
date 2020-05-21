@@ -186,7 +186,7 @@ git remote add origin https://gitee.com/know_the_season/AppModule.git
       git merge develop --no-ff
       ```
 
-   ![](https://zzq-markdown.oss-cn-shenzhen.aliyuncs.com/image/关闭fast fordward.png)
+   ![](https://zzq-markdown.oss-cn-shenzhen.aliyuncs.com/image/关闭fast_fordward.png)
 
    > git merge –no-ff 可以保存你之前的分支历史。能够更好的查看 merge历史，以及branch 状态。
    >
