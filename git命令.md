@@ -66,11 +66,14 @@ git branch -r -d origin/fix
 git push origin :fix (origin后有空格，fix已经被删掉了，tab键没有提示，要手动输入)
 ```
 
+创建并切换分支
 
+```
+git checkout -b 分支名
+```
 
 ```
 
-创建并切换分支：git checkout -b 分支名
 
 ## 操作
 
@@ -153,9 +156,9 @@ git remote add origin https://gitee.com/know_the_season/AppModule.git
 2. 修改并在分支提交
 
    ```
-git push origin develop
-   git status
-git commit -m "温习git流程"
+	git push origin develop
+    git status
+	git commit -m "温习git流程"
    ```
 
 3. 推送修改到远程分支
@@ -176,7 +179,7 @@ git commit -m "温习git流程"
 
 发现：并不能产生多条线，给人的感觉好像是还是在同一个分支里工作一样，这与之前的工作流表现完全不同
 
-![](.\images\工作流不同.png)
+![](https://zzq-markdown.oss-cn-shenzhen.aliyuncs.com/image/工作流不同.png)
 
 ### 疑问
 
@@ -184,7 +187,7 @@ git commit -m "温习git流程"
 
    原因： master 前面没有任何的新 commit，这种合并会自动使用 fast forward，加上--no-ff，git merge develop --no-ff
 
-   ![](.\images\关闭fast fordward.png)
+   ![](https://zzq-markdown.oss-cn-shenzhen.aliyuncs.com/image/关闭fast fordward.png)
 
    > git merge –no-ff 可以保存你之前的分支历史。能够更好的查看 merge历史，以及branch 状态。
    >
@@ -246,7 +249,7 @@ git push origin develop
 在当前项目中已经有过修改，此时同事推送commit到远程仓库，我需要将那些commit拉取到本地，那么此时我就先将自己的修改通过`git stash`存储到stash里，通过`git pull`获取到同事修改的代码，然后再恢复自己的更新：`git stash pop`（因为删掉了之前的stash，直接拿最新的stash），发现有冲突，日志如下，但是去发现，这指明冲突的几个文件并无修改，但就是在工作区中，且之前保存的几处修改都消失了
 
 ```
-Administrator@MINEW-66 MINGW64 /f/self (master|REBASE-i 1/1)
+Administrator /f/self (master|REBASE-i 1/1)
 $ git stash apply stash@{0}
 error: Your local changes to the following files would be overwritten by merge:
         app/src/main/A.java
@@ -292,7 +295,7 @@ git add .
 
 1. Android Studio工具栏中，`VCS——》Git——》resolve conflicts`，点击，则打开了一个对话框，如下：
 
-   ![image](.\images\e60a8256gy1fw8nzei6ekj20gq0fcjrg.jpg)
+   ![image](https://zzq-markdown.oss-cn-shenzhen.aliyuncs.com/image/e60a8256gy1fw8nzei6ekj20gq0fcjrg.jpg)
 
    其实能找到在哪里打开这个对话框才是更重要的一步。解决冲突反而是比较简单的，强调是在`VCS——》Git——》resolve conflicts`中打开
 
