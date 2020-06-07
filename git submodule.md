@@ -64,5 +64,57 @@ git submodule add git@gitee.com:know_the_season/BaseModule.git src/SubModule
 
 在项目中添加submodule就此完成
 
+## 切换submodule
 
+添加submodule到项目后，默认添加的是master分支，如果想要切换到其他分支，分为两种方式，分别是submodule对应仓库中是否有想要切换的分支，在这里分别对两种情况予以说明：
 
+场景：切换项目中submodule的分支到android_module分支
+
+1. 假如仓库中已经有android_module分支。首先需要先进入对应文件夹（submodule的根目录，而不是项目的根目录）
+
+   ```
+   # 进入BaseModule目录（已经添加到项目中）
+   $ cd BaseModule
+   
+   $ git branch -a
+   * master
+     remotes/origin/HEAD -> origin/master
+     remotes/origin/android_module
+     remotes/origin/master
+     
+   $ git checkout -b android_module origin/android_module
+   $ git add .
+   $ git commit -m "checkout submodule branch to android_module from master"
+   $ git push origin/master
+   ```
+
+2. 加入android_module分支是新建，那么新建分支后直接推送到仓库，与原来平常修改后推送到仓库中的操作方式没有区别
+
+   ```
+   $ git checkout -b android_module
+   $ git push origin/android_module
+   ```
+
+注意：在仓库中，是会保存submodule相对于原module所在commit的，所以在submodule中修改分支后，commit然后push，那么仓库中保存的就是所在commit的id。所以在检出项目代码（clone）时，需要分别进入submodule目录中再clone的原因
+
+## 删除submodule
+
+场景：在项目中删除BaseModule
+
+```
+# 首先是在命令行中直接进入项目根目录
+git rm BaseModule/
+git add .
+git commit -m "remove BaseModule"
+git push
+```
+
+首先是通过`git rm`命令删除BaseModule，这时会删除BaseModule文件夹和修改`.gitmodules`文件，即会删除对应submodule相关信息，比如
+
+```
+[submodule "BaseModule"]
+	path = BaseModule
+	url = git@gitee.com:know_the_season/BaseModule.git
+```
+
+这一段关于BaseModule的信息会被删除，然后保存修改，并push到仓库，就完成了本地到仓库的修改
