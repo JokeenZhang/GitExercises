@@ -18,9 +18,17 @@ Submodule path 'BaseModule': checked out '30d558935f357f7c6aeb273c8a0b4aca3be068
 Submodule path 'BleModule': checked out 'cbcbf111f18a92c9eecc6ffc3f9efdac6d182483'
 ```
 
+或者一条命令
+
+```
+git clone xxxxxx
+git submodule update --init --recursive
+```
+
 如果觉得这样多敲了多条命令的话，就直接用下面这条命令，一步到位。只是需要注意的是，如果有多个submodule或者submodule较大，那么就需要花很多的时间
 
 ```
+#传递 —recursive 参数，在 clone 代码的时候就会初始化仓库中定义的子模块
 git clone --recursive https://gitee.com/know_the_season/AppModule.git
 $ git clone --recursive https://gitee.com/know_the_season/AppModule.git
 Cloning into 'AppModule'...
@@ -213,3 +221,9 @@ git push
 ```
 
 这一段关于BaseModule的信息会被删除，然后保存修改，并push到仓库，就完成了本地仓库到远程仓库的修改
+
+## 场景
+
+### 项目更新submodule
+
+项目中本身就已经带有submodule

@@ -38,7 +38,7 @@ git push -u origin master
 创建分支，不切换
 
 ```
-git branch -d 分支名
+git branch 分支名
 ```
 
 删除分支 
@@ -54,6 +54,10 @@ git branch -D 分支名
 ```
 
 切换分支
+
+```
+git checkout 分支名
+```
 
 删除远程分支（20190416）
 
