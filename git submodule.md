@@ -165,6 +165,69 @@ rm 'BaseModule/proguard-rules.pro'
 $ git submodule add git@gitee.com:know_the_season/BaseModule.git BaseModule
 ```
 
+### 场景二：包含submodule合并
+
+现在大概有两种场景：
+
+1. master分支没有submodule，也没有相同命名的文件夹
+2. 原项目已经有baseModule，但是在另一分支develop分支中，删除baseModule，并且以submodule的形式添加进来，即通过git submodule add urlxxx baseModule所添加的submodule
+
+第一种场景很简单，按照简单的方式直接merge就完了。但是第二种的话，合并后较为麻烦
+
+（以下代码为base，而不是baseModule）
+
+```
+$ git merge version_1.0.0 --no-ff
+Removing base/src/test/java/com/minew/base/ExampleUnitTest.kt
+Removing base/src/main/res/values/styles.xml
+Removing base/src/main/res/values/strings.xml
+Removing base/src/main/res/values/dimens.xml
+
+……
+Removing app/src/main/java/com/minew/socialwristband/SplashActivity.kt
+Merge made by the 'recursive' strategy.
+ .gitmodules                                        |   3 +
+ app/build.gradle                                   |  20 +-
+ app/src/main/AndroidManifest.xml                   |  12 +-
+ app/src/main/ic_launcher-playstore.png             | Bin 0 -> 33780 bytes
+……
+ 125 files changed, 970 insertions(+), 2689 deletions(-)
+ create mode 100644 .gitmodules
+ create mode 100644 app/src/main/ic_launcher-playstore.png
+ delete mode 100644 app/src/main/java/com/minew/socialwristband/SplashActivity.kt
+……
+$ git status
+On branch develop
+Your branch is ahead of 'origin/develop' by 11 commits.
+  (use "git push" to publish your local commits)
+
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        deleted:    base
+
+no changes added to commit (use "git add" and/or "git commit -a")
+```
+
+如命令中以及提示中，可以得知，合并后，出现了许多Blob（文件模式为100644和100755），这与场景一出现的提示很相似，很快就想到了场景一种出现这种提示时的解决方式：
+
+```
+$ git rm -r --cached base
+rm 'base'
+$ git status
+On branch develop
+Your branch is ahead of 'origin/develop' by 11 commits.
+  (use "git push" to publish your local commits)
+
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        deleted:    base
+        
+$ git submodule add ssh://xxxxx.git base
+```
+
+是的，后续就按照场景一的方法进行处理就可以了。因为在master分支中的确没有base这个submodule，合并后再进行添加。注意，add submodule后，submodule默认所处的分支是master，如果需要切换就这时候切换，然后再提交至远程仓库
+
 ## 切换submodule分支
 
 需要注意的是，项目添加submodule后，在git命令行中，进入项目非submodule目录，显示的是项目所在的分支，进入submodule后，显示的是submodule所在分支。两者各自切换、创建、删除分支，都不会互相影响
@@ -198,7 +261,7 @@ $ git submodule add git@gitee.com:know_the_season/BaseModule.git BaseModule
    $ git push origin/android_module
    ```
 
-注意：在仓库中，是会保存submodule相对于原module所在commit的，所以在submodule中修改分支后，commit然后push，那么仓库中保存的就是所在commit的id。所以在检出项目代码（clone）时，需要分别进入submodule目录中再clone的原因
+注意：在仓库中，是会保存submodule相对于原module所在commit id的，所以在submodule中修改分支后，commit然后push，那么仓库中保存的就是所在commit的id。所以在检出项目代码（clone）时，需要分别进入submodule目录中再clone的原因
 
 ## 删除submodule
 
